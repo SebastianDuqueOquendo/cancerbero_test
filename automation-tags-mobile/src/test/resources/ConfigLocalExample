@@ -1,0 +1,21 @@
+                UiAutomator2Options options = new UiAutomator2Options()
+                        .setAutomationName("UiAutomator2")
+                        .setDeviceName("Pixel_3a_API_34_extension_level_7_x86_64")
+                        .setUdid("emulator-5554")
+                        .setPlatformName("Android")
+                        .setPlatformVersion("14")
+                        .setAppPackage("co.com.bancolombia.personas.superapp")
+                        .setAppActivity("co.com.bancolombia.personas.superapp.MainActivity")
+                        .setAutoGrantPermissions(true)
+                        .setNoReset(true)
+                        .setNewCommandTimeout(Duration.ofSeconds(90));
+
+                options.setCapability("autoGrantPermissions", true);
+                options.setCapability("skipUnlock", true);
+
+                options.setCapability("appWaitActivity", "*");
+                options.setCapability("appWaitDuration", 20000);
+
+                URL appiumServerUrl = new URL("http://127.0.0.1:4723/");
+                AndroidDriver driver = new AndroidDriver(appiumServerUrl, options);
+                actor.can(BrowseTheWeb.with(driver));

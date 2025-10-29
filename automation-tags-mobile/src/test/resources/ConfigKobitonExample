@@ -1,0 +1,23 @@
+        // Reemplaza con tus credenciales de Kobiton
+        String kobitonUsername = "TU_USUARIO";
+        String kobitonApiKey = "TU_API_KEY";
+        String kobitonServerUrl = String.format(
+            "https://%s:%s@api.kobiton.com/wd/hub", kobitonUsername, kobitonApiKey);
+
+        UiAutomator2Options options = new UiAutomator2Options()
+            .setAutomationName("UiAutomator2")
+            .setDeviceName("Galaxy S20") // O el nombre del dispositivo en Kobiton
+            .setPlatformName("Android")
+            .setPlatformVersion("12") // Cambia según el dispositivo
+            .setApp("kobiton-store:YOUR_APP_ID") // O la URL de tu APK en Kobiton
+            .setAutoGrantPermissions(true)
+            .setNoReset(true)
+            .setNewCommandTimeout(Duration.ofSeconds(90));
+
+        // Capabilities específicas de Kobiton
+        options.setCapability("sessionName", "Serenity Kobiton Test");
+        options.setCapability("deviceGroup", "KOBITON");
+        options.setCapability("captureScreenshots", true);
+
+        AndroidDriver driver = new AndroidDriver(new URL(kobitonServerUrl), options);
+        actor.can(BrowseTheWeb.with(driver));
